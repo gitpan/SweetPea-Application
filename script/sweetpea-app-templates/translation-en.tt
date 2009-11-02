@@ -1,0 +1,4 @@
+# english text translations
+[%head%]
+account_disabled: The account has been located but appears to be disabled.
+no_account: No account could be found using the credentials supplied, Please try again.

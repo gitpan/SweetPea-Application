@@ -1,0 +1,26 @@
+package App;
+
+use warnings;
+use strict;
+
+=head1 NAME
+
+App - Loads modules and provides accessors to SweetPea.
+
+=cut
+
+sub plugins {
+    my $s = pop @_;
+
+    # load modules using the following procedure, they will be available to
+    # the application as $s->nameofobject.
+
+    # Note! CGI (cgi), CGI::Cookie (cookie), and CGI::Session (session) 
+    # plugins/modules are pre-loaded and available. 
+
+    # e.g. $s->plug( 'nameofobject', sub { shift; return Module::Name->new(@_) } );
+
+    return $s;
+}
+
+1;    # End of App

@@ -1,0 +1,26 @@
+#![%shebang%] -w
+
+BEGIN {
+    use FindBin;
+    use lib $FindBin::Bin . '/sweet';
+    use lib $FindBin::Bin . '/sweet/application';
+    use lib $FindBin::Bin . '/sweet/modules';
+}
+
+use SweetPea [%version%];
+
+# run application
+
+my  $s = sweet;
+    
+    exit $s->run if $s->request_method;
+    
+    # test from the cli
+    $s->routes({
+      
+      # write to console  
+      '/root/_shutdown'   => sub {
+        shift->output('debug', 'cli');
+      }
+        
+    })->test($ARGV[0]); 

@@ -1,0 +1,16 @@
+# application configuration
+[%head%]
+datastore: development
+email:
+  sendmail:
+    driver: Sendmail
+    path: /usr/sbin/sendmail
+  smtp:
+    driver: SMTP
+    host: localhost
+  qmail:
+    driver: Qmail
+    path: /usr/sbin/qmail-inject
+  nntp:
+    driver: NNTP
+    host: localhost

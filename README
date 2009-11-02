@@ -1,0 +1,76 @@
+SweetPea-Application
+
+DESCRIPTION
+    SweetPea::Application is a full stack web application framework utilizing
+    conventional wisdom and granular configuration over a highly
+    sophisticated Push MVC architecture.
+    
+    SweetPea provides a standard set of tools to accomplish a standard set of
+    web application development tasks.
+    
+    "I must be an aligator as much as I scale...."
+    -sweetpea
+
+FEATURES
+    Full Stack Features:
+    * Application Configuration (via YAML)
+    * Security - Role-Based Access Control
+    * Validation (via Data::FormValidator)
+    * HTML Templating (via Template)
+    * ORM
+    * URL Routing (via SweetPea)
+    * HTTP Server (via HTTP::Server::Simple)
+    * Web Services Layer (via JSON)
+    * Localization Layer
+    * Email (via Email::Stuff)
+    * RAD Tools
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+	
+APPLICATION SETUP
+
+	sweetpea-app make --stack
+	sweetpea-app create --dns=? --user=? --pass=?
+	
+	# after altering the database
+	sweetpea-app update --dns=? --user=? --pass=?
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc SweetPea::Application
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=SweetPea-Application
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/SweetPea-Application
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/SweetPea-Application
+
+    Search CPAN
+        http://search.cpan.org/dist/SweetPea-Application/
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2009 Al Newkirk
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+

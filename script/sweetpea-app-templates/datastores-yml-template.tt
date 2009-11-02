@@ -1,0 +1,11 @@
+# list of available datasources
+[%head%]
+datastores:
+  development:
+    dsn: dbi:mysql:sample_database
+    username: root
+    password: password
+  production:
+    dsn: dbi:pg:dbname=sample_database
+    username: root
+    password: password

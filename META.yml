@@ -1,0 +1,39 @@
+---
+abstract: 'A full stack web framework for the rest of us.'
+author:
+  - 'Al Newkirk, C<< <al.newkirk at awnstudio.com> >>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+  Test::More: 0.42
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.91'
+license: gpl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: SweetPea-Application
+no_index:
+  directory:
+    - inc
+    - script/sweetpea-app-templates
+    - t
+requires:
+  Config::Any: 0
+  DBIx::Simple: 0
+  Data::FormValidator: 0
+  Email::Stuff: 0
+  Exception::Handler: 0
+  File::Find: 0
+  File::ShareDir: 0
+  File::Util: 0
+  SQL::Abstract: 0
+  SQL::Interp: 0
+  SQL::Translator: 0
+  SweetPea: 2.35
+  Template: 0
+  YAML::Syck: 0
+resources:
+  license: http://opensource.org/licenses/gpl-license.php
+version: 0.021

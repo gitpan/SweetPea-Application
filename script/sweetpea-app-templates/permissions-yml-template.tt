@@ -1,0 +1,15 @@
+# role-based access control list
+[%head%]
+roles:
+  administrator:
+    permissions:
+      manage accounts:
+        operations:
+          - create account
+          - update account
+          - delete account
+  manager:
+    permissions:
+      manager accounts:
+        operations:
+          - create account
