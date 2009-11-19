@@ -18,11 +18,11 @@ SweetPea::Application - A full stack web framework for the rest of us.
 
 =head1 VERSION
 
-Version 0.021
+Version 0.022
 
 =cut
 
-our $VERSION = '0.021';
+our $VERSION = '0.022';
 
 =head1 SYNOPSIS
 

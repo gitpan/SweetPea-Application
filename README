@@ -1,12 +1,12 @@
 SweetPea-Application
 
 DESCRIPTION
-    SweetPea::Application is a full stack web application framework utilizing
-    conventional wisdom and granular configuration over a highly
+    SweetPea::Application is a full stack web application framework
+    utilizing conventional wisdom and granular configuration over a highly
     sophisticated Push MVC architecture.
     
-    SweetPea provides a standard set of tools to accomplish a standard set of
-    web application development tasks.
+    SweetPea provides a standard set of tools to accomplish a standard set
+    of web application development tasks.
     
     "I must be an aligator as much as I scale...."
     -sweetpea
@@ -23,7 +23,7 @@ FEATURES
     * Web Services Layer (via JSON)
     * Localization Layer
     * Email (via Email::Stuff)
-    * RAD Tools
+    * RAD Tools (SweetPea::Cli)
 
 INSTALLATION
 
@@ -35,12 +35,13 @@ To install this module, run the following commands:
 	make install
 	
 APPLICATION SETUP
-
-	sweetpea-app make --stack
-	sweetpea-app create --dns=? --user=? --pass=?
+	(requires SweetPea::Cli)
+	
+	sweetpea make -f
+	sweetpea data -c dbi:driver:db user pass
 	
 	# after altering the database
-	sweetpea-app update --dns=? --user=? --pass=?
+	sweetpea data -u dbi:driver:db user pass
 
 SUPPORT AND DOCUMENTATION
 

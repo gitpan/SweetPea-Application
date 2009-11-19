@@ -31,11 +31,16 @@ SweetPea::Application::Config - Configuration handling for SweetPea-Application.
 =cut
 
 sub new {
-    my ($class, $s) = @_;
+    my ($class, $s, $path) = @_;
     my $self        = {};
     my $keys        = {};
     my @files       = ();
-    my $path        = $s->path('/sweet/configuration');
+    if (!$path) {
+       $path        = $s->path('/sweet/configuration');
+    }
+    else {
+        $path       .= '/sweet/configuration';
+    }
     bless $self, $class;
     if (-e $path) {
         find( sub{
@@ -103,7 +108,8 @@ sub set {
                     'content' => 'temporary placeholder',
                     'bitmask' => 0644
                 );
-                $s->file('>', "sweet/configuration$key.yml", $yaml);
+                $s->file('>', "sweet/configuration$key.yml",
+                         ($hash ? Dump($hash) : $yaml));
                 return $self;
             }
         }

@@ -61,7 +61,7 @@ sub _translate_database_type {
     my $dsn  = shift;
     my $s    = $self->{base};
        $dsn  =~ s/dbi\:([a-zA-Z0-9\-\_]+)\:/dbi\:$1\:/ if $dsn =~ /\:/;
-    return $self->{dbit}->{$dsn};
+    return $self->{dbit}->{lc($dsn)};
 }
 
 =head2 create_database
@@ -182,10 +182,14 @@ sub create_database {
          is_nullable       => 1
     );
     $table->primary_key('id');
-    
     my  $db = DBI->connect(@dsn) or exit print "\n", $self->{error}->trace(($@));
     if ($db) {
-        for ($translator->translate) {
+        # hack
+        my ($scheme, $driver, @trash)
+                         = DBI->parse_dsn($dsn[0]);
+        
+        for ($translator->translate(
+                to => $self->_translate_database_type($driver))) {
             $db->do($_) or exit print "\n", $self->{error}->trace(($@));
         }
     }
@@ -237,16 +241,16 @@ sub update_database {
     my $table_configuration_template = {
         table     => {
             'name'    => '',
-            'columns' => ''
+            'columns' => {}
         },
         form      => {
             'name'          => '',
-            'fields'        => '',
-            'validation'    => ''
+            'fields'        => {},
+            'validation'    => {}
         },
         grid      => {
             'name'    => '',
-            'columns' => ''
+            'columns' => {}
         }
     };
     

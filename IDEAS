@@ -1,0 +1,31 @@
+SWEETPEA::APPLICATION::PLUGIN::
+This section is reserved for community add-ons...
+sweetpea-application-plugin-etl (extract-transform-load plugin)
+sweetpea-application-plugin-ajax (javascript-less ajax functionality)
+
+ORM Relationship Management
+
+my $u = $s->dbo->users;
+
+#get all users
+$u->read->next;
+
+#get users permissions
+
+$u->permissions; 
+
+#uses $u->current joins permissions table using yaml defined relationship
+# equal to select * from users, permissions where users.id = permissions.user
+# permissions would be a shortcut to $s->dbo->permissions->read({ relationship });
+
+# one-to-many
+# one-to-one
+# many-to-many
+
+for (0..$u->count) {
+
+	$u->next; # is now aware is linked to another table
+	$u->permissions->role('new role');
+	$u->permissions->update;
+
+}

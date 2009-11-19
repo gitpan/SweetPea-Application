@@ -1,0 +1,41 @@
+SweetPea-Application Features (Todo List)
+
+FEATURES
+
+-   [-] Change the welcome screen to match website
+-   [-] Fix generated file permissiosn, maybe include a file permissions checker
+-   [-] embedded http server (plack)
+-   [-] orm needs many-to-many, one-to-one, and one-to-many relationships
+-   [x] interactive rad cli
+-   [?] rad tools: db reverse update (like rails migration, update db from config)
+-   [d] form and grid renderers should also create an array of individual form/grid elements
+-   [x] configuration
+-   [x] templating
+-   [x] url dispatching
+-   [x] validation
+-   [x] service support
+-   [x] database support
+-   [x] role-based access control
+-   [x] object relational mapping
+-   [x] localization
+-   [x] email support
+-   [x] rad tools: create/update db
+-   [x] rad tools: create models, views and controllers
+-   [x] rad tools: create yaml profile templates for validation
+-   [x] form and grid renderers $s->grid->render('users', $conditions); $s->form->render('users', [col1, co2, col3]);
+
+STRUCTURE
+
+-   [x] lazy-loading
+
+DISCOVERY
+
+-   [x] mock function needs to have its own environment (or force request method to get),
+        (currently is borrowing from the current env which alters flow control)
+-   [x] rbac needs logout function
+-   [x] orm read auto-where clause issue on read (possibly others)
+-   [x] structure to include modules folder (for 3rd party modules or local::libs)
+-   [x] add name and meta data tables to database users tables
+-   [x] ability to run custom query from orm and have the resultset attached
+-   [x] should ship with testing suite and dependency suite, TODO, CHANGES, ETC
+-   [d] should be able to flash multiple messages $s->error should work like $s->flash

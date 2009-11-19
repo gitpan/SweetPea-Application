@@ -17,8 +17,9 @@ name: SweetPea-Application
 no_index:
   directory:
     - inc
-    - script/sweetpea-app-templates
     - t
+recommends:
+  SweetPea::Cli: 0
 requires:
   Config::Any: 0
   DBIx::Simple: 0
@@ -31,9 +32,9 @@ requires:
   SQL::Abstract: 0
   SQL::Interp: 0
   SQL::Translator: 0
-  SweetPea: 2.35
+  SweetPea: 2.364
   Template: 0
   YAML::Syck: 0
 resources:
   license: http://opensource.org/licenses/gpl-license.php
-version: 0.021
+version: 0.022

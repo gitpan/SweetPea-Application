@@ -348,6 +348,18 @@ sub count {
 
 =head2 create
 
+    Caveat 1: The create method will remove the primary key if the column
+    is marked as auto-incremented ...
+    
+    # see declaration in the table's yaml data profile
+    table: 
+      columns: 
+        [column]: 
+          auto: 1 
+    
+    ... this will need to be changed manually if your database doesn't
+    support the auto-increment declaration, i.e. SQLite
+    
     The create method creates a new entry in the datastore.
     Takes 1 arg.
     
@@ -386,7 +398,7 @@ sub create {
     # process direct input
     if (%input) {
         foreach my $i (keys %input) {
-            if (defined $dbo->{current}->{$i}) {
+            if (defined $dbo->{configuration}->{table}->{columns}->{$i}) {
                 $dbo->{current}->{$i} = $input{$i};
             }
         }
@@ -461,7 +473,8 @@ sub read {
         # constrain where to actual existing columns
         if ($where) {
             foreach my $i (keys %{$where}) {
-                unless (defined $dbo->{current}->{$i}) {
+                my $table = $dbo->{configuration}->{table};
+                unless (defined $table->{columns}->{$i}) {
                     delete $where->{$i};
                 }
             }
@@ -519,7 +532,8 @@ sub update {
     # constrain where to actual existing columns
     if ($input) {
         foreach my $i (keys %{$input}) {
-            unless (defined $dbo->{current}->{$i}) {
+            my $table = $dbo->{configuration}->{table};
+            unless (defined $table->{columns}->{$i}) {
                 delete $input->{$i};
             }
         }
@@ -535,7 +549,8 @@ sub update {
         # constrain where to actual existing columns
         if ($where) {
             foreach my $i (keys %{$where}) {
-                unless (defined $dbo->{current}->{$i}) {
+                my $table = $dbo->{configuration}->{table};
+                unless (defined $table->{columns}->{$i}) {
                     delete $where->{$i};
                 }
             }
@@ -583,7 +598,8 @@ sub delete {
         # constrain where to actual existing columns
         if ($where) {
             foreach my $i (keys %{$where}) {
-                unless (defined $dbo->{current}->{$i}) {
+                my $table = $dbo->{configuration}->{table};
+                unless (defined $table->{columns}->{$i}) {
                     delete $where->{$i};
                 }
             }

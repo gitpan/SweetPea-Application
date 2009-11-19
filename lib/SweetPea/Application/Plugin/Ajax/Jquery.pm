@@ -18,6 +18,18 @@ responses in jQuery using SweetPea-Application.
 
     ... from inside SweetPea::Application or a Controller;
     $s->ajax->request('/services/accounts', 'post', ['a > span', 'input']);
+    or maybe
+    get http://localhost/service/accounts id=12
+    put http://localhost/service/accounts id=12 email=newone
+    
+    $s->ajax->function('login_checker', 'get', '/service/accounts');
+    $s->ajax->script('tag');
+    
+    # generates the javascript code with or without the script tag
+    # useful for hidding alot of methods [% s.ajax.script %]
+    
+    ... in html
+    onclick="login_checker();"
 
 =head1 METHODS
 
