@@ -15,7 +15,6 @@ lib/SweetPea/Application/Config.pm
 lib/SweetPea/Application/Data.pm
 lib/SweetPea/Application/Devel.pm
 lib/SweetPea/Application/Email.pm
-lib/SweetPea/Application/Error.pm
 lib/SweetPea/Application/Json.pm
 lib/SweetPea/Application/Locale.pm
 lib/SweetPea/Application/Model.pm

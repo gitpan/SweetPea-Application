@@ -37,4 +37,4 @@ requires:
   YAML::Syck: 0
 resources:
   license: http://opensource.org/licenses/gpl-license.php
-version: 0.022
+version: 0.023
