@@ -18,11 +18,11 @@ SweetPea::Application - A full stack web framework for the rest of us.
 
 =head1 VERSION
 
-Version 0.023
+Version 0.024
 
 =cut
 
-our $VERSION = '0.023';
+our $VERSION = '0.024';
 
 =head1 SYNOPSIS
 
@@ -237,16 +237,6 @@ sub _plugins {
             require 'SweetPea/Application/Validate.pm';
             my $self = shift;
             return SweetPea::Application::Validate->new($self);
-        }
-    );    
-    
-    # errors class
-    $self->plug(
-        'error',
-        sub {
-            require 'SweetPea/Application/Error.pm';
-            my $self = shift;
-            return SweetPea::Application::Error->new($self);
         }
     );
     
