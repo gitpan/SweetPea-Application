@@ -32,9 +32,9 @@ requires:
   SQL::Abstract: 0
   SQL::Interp: 0
   SQL::Translator: 0
-  SweetPea: 2.364
+  SweetPea: 2.3664
   Template: 0
   YAML::Syck: 0
 resources:
   license: http://opensource.org/licenses/gpl-license.php
-version: 0.024
+version: 0.025

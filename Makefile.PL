@@ -5,7 +5,7 @@ name           'SweetPea-Application';
 all_from       'lib/SweetPea/Application.pm';
 
 # Specific dependencies
-requires       'SweetPea'               => '2.364';
+requires       'SweetPea'               => '2.3664';
 recommends     'SweetPea::Cli'          => '0';
 requires       'Config::Any'            => '0';
 requires       'YAML::Syck'             => '0';

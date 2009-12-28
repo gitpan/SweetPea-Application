@@ -29,6 +29,7 @@ MANIFEST
 META.yml
 OTHER_README
 README
+SweetPea-Application.kpf
 t/00-load.t
 t/spa-configuration.t
 TODO

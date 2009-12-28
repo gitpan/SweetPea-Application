@@ -18,40 +18,37 @@ SweetPea::Application - A full stack web framework for the rest of us.
 
 =head1 VERSION
 
-Version 0.024
+Version 0.025
 
 =cut
 
-our $VERSION = '0.024';
+our $VERSION = '0.025';
 
 =head1 SYNOPSIS
 
-SweetPea::Application is an extention of the SweetPea web framework which is
-considered the core whereas SweetPea::Application is a full stack web
-application framework utilizing conventional wisdom and granular configuration
-over a highly sophisticated Push MVC architecture. (IT acronyms rock...)
+SweetPea::Application is a full-stack web application framework built atop
+of the L<SweetPea> web framework. SweetPea::Application aims to provide all
+the functionality common to building complete and robust web applications
+via a suite of packages through a unified API.
 
-SweetPea::Application overwrites the generator created by the core SweetPea
-install updating its functionality. The sweetpea cli now uses the following:
-
-    ... at the cli (command-line interface)
+    # build a full-stack web application (from the cli)
+    sweetpea make -f
     
-    # build a single-script application (go minimalist)
-    sweetpea make --script
+    use SweetPea;
+    sweet->routes({
     
-    # build a micro web application (i need more structure)
-    sweetpea make --application
-    
-    # build a full-stack web application (i need more power)
-    sweetpea make --stack [dbi:mysql:database root [pass]]
+        '/' => sub {
+            shift->forward('/way');
+        },
+        
+        '/way' => sub {
+            shift->html('I am the way the truth and the light!');
+        }
+        
+    })->run;
 
-=head1 EXPORTED
-
-    sweet (shortcut to SweetPea object instantiation)
-
-=head1 METHODS
-
-=head2 sweet
+To Get Started, Review
+L<SweetPea::Cli::Documentation> or L<SweetPea::Application::Documentation>.
 
 =cut
 
@@ -59,107 +56,12 @@ sub sweet {
     return SweetPea::Application->new;
 }
 
-=head2 new
-
-=cut
-
-sub new {
-    my $class   = shift;
-    my $options = shift;
-    my $self    = {};
-    bless $self, $class;
-
-    #declare config stuff
-    $self->{store}->{application}->{html_content}     = [];
-    $self->{store}->{application}->{action_discovery} = 1;
-    $self->{store}->{application}->{local_session}    = 0; # for debugging
-    $self->{store}->{application}->{content_type}     = 'text/html';
-    $self->{store}->{application}->{path}             = $FindBin::Bin;
-    $self->{store}->{application}->{local_session}    =
-        $options->{local_session} ? $options->{local_session} : 0; # debugging
-    $self->{store}->{application}->{session_folder}   =
-        $options->{session_folder} if $options->{session_folder};
-    $self->{store}->{template}->{data}                = '';
-    return $self;
-}
-
-
-=head2 _plugins
-
-=cut
-
 sub _plugins {
     my $self = shift;
-
-    # NOTE! The database and email plugins are not used internally so changing
-    # them to a module of you choice won't effect any core functionality. Those
-    # modules/plugins should be configured in App.pm.
-    # load modules using the following procedure, they will be available to the
-    # application as $s->nameofobject.
-
-    # browser support
-    $self->plug(
-        'cgi',
-        sub {
-            my $self = shift;
-            return CGI->new;
-        }
-    );
-
-    # cookie support
-    $self->plug(
-        'cookie',
-        sub {
-            require 'CGI/Cookie.pm';
-            my $self = shift;
-            push @{ $self->{store}->{application}->{cookie_data} },
-              CGI::Cookie->new(@_);
-            return $self->{store}->{application}->{cookie_data}
-              ->[ @{ $self->{store}->{application}->{cookie_data} } ];
-        }
-    );
-
-    # session support
-    $self->plug(
-        'session',
-        sub {
-            require 'CGI/Session.pm';
-            my $self = shift;
-            my $opts = {};
-            my $session_folder = $ENV{HOME} || "";
-            $session_folder = (split /[\;\:\,]/, $session_folder)[0]
-             if $session_folder =~ m/[\;\:\,]/;
-            $session_folder =~ s/[\\\/]$//;
-            CGI::Session->name("SID");
-            if ( -d -w "$session_folder/tmp" ) {
-                $opts->{Directory} = "$session_folder/tmp";
-            }
-            else {
-                if ( -d -w $session_folder ) {
-                    mkdir "$session_folder/tmp", 0777;
-                }
-                if ( -d -w "$session_folder/tmp" ) {
-                    $opts->{Directory} = "$session_folder/tmp";
-                }    
-            }
-            if ($self->{store}->{application}->{local_session}
-                && !$opts->{Directory}) {
-                mkdir "sweet"
-                unless -e
-                "$self->{store}->{application}->{path}/sweet";
-                
-                mkdir "sweet/sessions"
-                unless -e
-                "$self->{store}->{application}->{path}/sweet/sessions";
-                
-                $opts->{Directory} = 'sweet/sessions';
-            }
-            my $sess = CGI::Session->new("driver:file", undef, $opts);
-            $sess->flush;
-            return $sess;
-        }
-    );
     
+    # use existing
+    SweetPea::_plugins($self);
+
     # configuration support
     $self->plug(
         'config',
@@ -284,17 +186,15 @@ sub _plugins {
     return $self;
 }
 
-=head2 finish
-
-=cut
-
 sub finish {
     my $self = shift;
     
     # return captured data for mock transactions
     if ($self->{store}->{application}->{mock_run}) {
-        if (length($self->{store}->{template}->{data}) > 1) {
-            $self->html($self->{store}->{template}->{data});
+        if ($self->{store}->{template}) {
+            if (length($self->{store}->{template}->{data}) > 1) {
+                $self->html($self->{store}->{template}->{data});
+            }
         }
         # check for laziness
         elsif (length($self->template->{data}) > 1) {
@@ -333,15 +233,11 @@ Please report any bugs or feature requests to C<bug-sweetpea-application at rt.c
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=SweetPea-Application>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
-
-
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc SweetPea::Application
-
 
 You can also look for information at:
 
@@ -365,9 +261,7 @@ L<http://search.cpan.org/dist/SweetPea-Application/>
 
 =back
 
-
 =head1 ACKNOWLEDGEMENTS
-
 
 =head1 COPYRIGHT & LICENSE
 
